@@ -5,10 +5,12 @@ services:
     build: .
     container_name: fastapi-baseline
     ports:
-      - "8080:8080"
+      - "8081:8080" # TODO Change the host port
     restart: unless-stopped
     environment:
       - TZ=UTC
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
     volumes:
       - ./logs:/app/logs
     # Если нужно GPU

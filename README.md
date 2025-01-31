@@ -1,18 +1,22 @@
 # FastAPI Baseline Service
+
 Это пример базового приложения, которое реализует API для получения запроса и возврата ответа.
 Приложение написано на FastAPI, разворачивается при помощи docker-compose.
 
 ## Сборка
+
 Для запуска выполните команду:
 
 ```bash
 docker-compose up -d
 ```
+
 Она соберёт Docker-образ, а затем запустит контейнер.
 
 После успешного запуска контейнера приложение будет доступно на http://localhost:8080.
 
 ## Проверка работы
+
 Отправьте POST-запрос на эндпоинт /api/request. Например, используйте curl:
 
 ```bash
@@ -23,6 +27,7 @@ curl --location --request POST 'http://localhost:8080/api/request' \
   "id": 1
 }'
 ```
+
 В ответ вы получите JSON вида:
 
 ```json
@@ -30,22 +35,25 @@ curl --location --request POST 'http://localhost:8080/api/request' \
   "id": 1,
   "answer": 1,
   "reasoning": "Из информации на сайте",
-  "sources": [
-    "https://itmo.ru/ru/",
-    "https://abit.itmo.ru/"
-  ]
 }
 ```
 
 id будет соответствовать тому, что вы отправили в запросе,
 answer (в базовой версии) всегда будет 5.
+
 ## Кастомизация
+
 Чтобы изменить логику ответа, отредактируйте функцию handle_request в main.py.
 Если нужно использовать дополнительные библиотеки, добавьте их в requirements.txt и пересоберите образ.
-
 
 Чтобы остановить сервис, выполните:
 
 ```bash
 docker-compose down
+```
+
+```
+curl --location --request POST "http://localhost:8081/api/request" ^
+--header "Content-Type: application/json" ^
+--data-raw "{ \"query\": \"В каком году Университет ИТМО был включён в число Национальных исследовательских университетов России?\n1. 2007\n2. 2009\n3. 2011\n4. 2015\", \"id\": 2 }"
 ```
