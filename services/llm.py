@@ -21,9 +21,11 @@ async def generate_answer(query: str, context: str) -> dict:
         """
 
         response = client.chat(
-            model="mistral-large-latest",
+            # model="mistral-large-latest",
+            model="mistral-small-latest",
             messages=[ChatMessage(role="user", content=prompt)],
-            response_format={"type": "json_object"}
+            response_format={"type": "json_object"},
+            temperature=0.3
         )
 
         return json.loads(response.choices[0].message.content)

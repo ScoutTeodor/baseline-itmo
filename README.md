@@ -35,6 +35,7 @@ curl --location --request POST 'http://localhost:8080/api/request' \
   "id": 1,
   "answer": 1,
   "reasoning": "Из информации на сайте",
+  "sources": ["https://itmo.ru/ru/", "https://abit.itmo.ru/"]
 }
 ```
 
